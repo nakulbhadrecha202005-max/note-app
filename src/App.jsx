@@ -14,7 +14,7 @@ function App() {
   };
 
   const getUsers = () => {
-    fetch("http://localhost:3000/read")
+    fetch("https://notes-app-1-6a33.onrender.com/read")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   };
@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   const createUser = () => {
-    fetch("http://localhost:3000/create", {
+    fetch("https://notes-app-1-6a33.onrender.com/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function App() {
   };
 
   const deleteUser = (id) => {
-    fetch(`http://localhost:3000/delete/${id}`, {
+    fetch(`https://notes-app-1-6a33.onrender.com/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -59,7 +59,7 @@ function App() {
       alert("Please select a user to update");
       return;
     }
-    fetch(`http://localhost:3000/update/${updateId}`, {
+    fetch(`https://notes-app-1-6a33.onrender.com/update/${updateId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
