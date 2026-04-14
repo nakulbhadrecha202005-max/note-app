@@ -8,6 +8,7 @@ function App() {
     email: "",
   });
   const [updateId, setUpdateId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -78,6 +79,13 @@ function App() {
       })
       .catch((err) => console.log("Error : ", err));
   };
+
+  const filteredUsers = users.filter(
+    (u) =>
+      u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.username.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
   return (
     <div>
       <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8 text-slate-800">
@@ -157,9 +165,24 @@ function App() {
           </div>
         </div>
 
+        {/* Search Section */}
+        <div className="max-w-xl mx-auto mb-10">
+          <div className="relative group">
+            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors">
+              search
+            </span>
+            <input
+              type="text"
+              placeholder="Search your notes..."
+              className="w-full bg-white border border-slate-200 py-4 pl-12 pr-4 rounded-2xl shadow-sm outline-none focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 transition-all text-slate-600 placeholder:text-slate-400"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
         {/* Notes List Grid */}
         <div className="max-w-6xl  mx-auto grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {users.map((u) => (
+          {filteredUsers.map((u) => (
             <div
               key={u._id}
               className="group p-6 bg-gray-400 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
