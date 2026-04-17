@@ -14,10 +14,14 @@ function App() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const getUsers = () => {
-    fetch("https://notes-app-1-6a33.onrender.com/read")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
+  const getUsers = async () => {
+    try {
+      const res = await fetch("https://notes-app-1-6a33.onrender.com/read");
+      const data = await res.json();
+      setUsers(data);
+    } catch (err) {
+      console.log("Fetch error:", err);
+    }
   };
 
   useEffect(() => {
